@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="/layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Un Element Pédagogiques</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <div class="title">
+        <h3 class="sticky-notes-title">Modifier Un Element Pédagogique</h3>
+    </div>
+    <a th:href="@{/elements_pedagogiques}" class="block btn btn-primary">Elements Pédagogiques</a>
+</div>
+
+<div layout:fragment="content">
+    <div th:if="${error}" class="alert alert-danger my-4">
+        <span th:text="${error}"></span>
+    </div>
+    <form action="/elements_pedagogiques/modifier" method="post" th:object="${elementPedagogique}" >
+        <div class="form-group mb-4">
+            <label for="typeElement">Type de l'élément</label>
+            <select class="form-control" id="typeElement" name="typeElement" th:field="*{typeElement}">
+                <option value="">Sélectionner un type</option>
+                <option th:each="type : ${types_elements}" th:value="${type.id}" th:text="${type.nom}"></option>
+            </select>
+            <span class="text-danger text-sm" th:if="${#fields.hasErrors('typeElement')}" th:errors="*{typeElement}"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="titre">Titre</label>
+            <input type="text" class="form-control" id="titre" name="titre" th:field="*{titre}"/>
+            <span class="text-danger text-sm" th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="coordonateur">Coordonateur</label>
+            <select class="form-control" id="coordonateur" name="coordonateur" th:field="*{coordonateur}">
+                <option value="">Sélectionner un Coordonateur</option>
+                <option th:each="coordonateur : ${enseignants}" th:value="${coordonateur.id}" th:text="${coordonateur.nom}"></option>
+            </select>
+            <span class="text-danger text-sm" th:if="${#fields.hasErrors('coordonateur')}" th:errors="*{coordonateur}"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="filiere">Filière</label>
+            <select class="form-control" id="filiere" name="filiere" th:field="*{filiere}">
+                <option value="">Sélectionner un Filière</option>
+                <option th:each="filiere : ${filieres}" th:value="${filiere.id}" th:text="${filiere.nom}"></option>
+            </select>
+            <span class="text-danger text-sm" th:if="${#fields.hasErrors('filiere')}" th:errors="*{filiere}"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="niveau">Niveau</label>
+            <select class="form-control" id="niveau" name="niveau" th:field="*{niveau}">
+                <option value="">Sélectionner un Niveau</option>
+                <option th:each="niveau : ${niveaux}" th:value="${niveau.id}" th:text="${niveau.nom}"></option>
+            </select>
+            <span class="text-danger text-sm" th:if="${#fields.hasErrors('niveau')}" th:errors="*{niveau}"></span>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <button class="btn btn-primary">
+                Modifier
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="/layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajouter Des Enseignants Au Département</title>
+    </head>
+    <body>
+        <div layout:fragment="header">
+            <div class="title">
+                <h3 class="sticky-notes-title">Ajouter Des Enseignants</h3>
+            </div>
+            <a th:href="@{/departements}" class="block btn btn-primary">Département</a>
+        </div>
+
+        <div layout:fragment="content">
+            <div th:if="${error}" class="alert alert-danger my-4">
+                <span th:text="${error}"></span>
+            </div>
+            <form action="/departements/ajouter_enseignant" method="post" th:object="${departement}" >
+                <input type="hidden" name="id" th:field="*{id}"/>
+                <div class="form-group mb-4">
+                    <label for="nom">Nom</label>
+                    <input type="text" readonly class="form-control" id="nom" name="nom" th:field="*{nom}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="enseignants">Enseignants</label>
+                    <select class="form-control" name="enseignants" id="enseignants" multiple th:field="*{enseignants}">
+                        <option value="">Sélectionner les enseignants</option>
+                        <option th:each="enseignant : ${enseignants}" th:value="${enseignant.id}" th:text="${enseignant.nom + ' ' + enseignant.prenom}"></option>
+                    </select>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('enseignants')}" th:errors="*{enseignants}"></span>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <button class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

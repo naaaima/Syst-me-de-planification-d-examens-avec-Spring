@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="/layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Gérer les Departements</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <div class="title">
+        <h3 class="sticky-notes-title">Afficher Un Departement</h3>
+    </div>
+    <a th:href="@{/departements}" class="block btn btn-primary">Departement</a>
+</div>
+
+<div layout:fragment="content">
+    <div class="border p-3">
+        <ul class="list-unstyled">
+            <li class="mb-3"><span class="text-primary text-bold">Nom : </span><span class="text-info" th:text="${departement.getNom()}"></span></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

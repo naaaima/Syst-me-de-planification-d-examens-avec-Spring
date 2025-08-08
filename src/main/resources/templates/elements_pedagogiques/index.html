@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="/layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Gérer les Element Pedagogiques</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <div class="title">
+        <h3 class="sticky-notes-title">Gérer les Element Pedagogiques</h3>
+    </div>
+    <a th:href="@{/elements_pedagogiques/ajouter}" class="block btn btn-primary">+ Nouveau Element Pedagogique</a>
+</div>
+
+<a th:href="@{/elements_pedagogiques/ajouter}" class="btn btn-primary">+ Nouveau Element</a>
+<div layout:fragment="content">
+    <div th:if="${success}" class="alert alert-success my-4">
+        <span th:text="${success}"></span>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Type Element</th>
+            <th>Titre</th>
+            <th>Coordonateur</th>
+            <th>Filière</th>
+            <th>Niveau</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="elementPedagogique : ${elementPedagogiques}">
+            <td><span th:text="${elementPedagogique.getTypeElement().getNom()}"></span></td>
+            <td><span th:text="${elementPedagogique.getTitre()}"></span></td>
+            <td><span th:text="${elementPedagogique.getCoordonateur().getNom()+' '+ elementPedagogique.getCoordonateur().getPrenom()}"></span></td>
+            <td><span th:text="${elementPedagogique.getFiliere().getNom()}"></span></td>
+            <td><span th:text="${elementPedagogique.getNiveau().getNom()}"></span></td>
+            <td class="text-center">
+                <div class="d-flex gap-2">
+                    <a th:href="@{/elements_pedagogiques/{id}(id=${elementPedagogique.id})}" class="d-block text-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </a>
+                    <a th:href="@{/elements_pedagogiques/edit/{id}(id=${elementPedagogique.id})}" class="d-block text-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+                            <path d="M11 4L20 13"></path>
+                            <path d="M2.5 21L5 21 19.5 6.5 17 4 2.5 18.5 2.5 21z"></path>
+                        </svg>
+                    </a>
+                    <a th:href="@{/elements_pedagogiques/delete/{id}(id=${elementPedagogique.id})}" class="d-block text-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6L19 22 5 22 5 6"></path>
+                            <path d="M10 11L10 17"></path>
+                            <path d="M14 11L14 17"></path>
+                        </svg>
+                    </a>
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="/layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajouter Un Enseignant</title>
+    </head>
+    <body>
+        <div layout:fragment="header">
+            <div class="title">
+                <h3 class="sticky-notes-title">Ajouter Un Enseignant</h3>
+            </div>
+            <a th:href="@{/enseignants}" class="block btn btn-primary">Enseignant</a>
+        </div>
+
+        <div layout:fragment="content">
+            <div th:if="${error}" class="alert alert-danger my-4">
+                <span th:text="${error}"></span>
+            </div>
+            <form action="/enseignants/ajouter" method="post" th:object="${enseignant}" >
+                <div class="form-group mb-4">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" th:field="*{nom}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" th:field="*{prenom}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" th:field="*{email}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" th:field="*{username}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="password">Mot De Passe</label>
+                    <input type="password" class="form-control" id="password" name="password" th:field="*{password}"/>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
