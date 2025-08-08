@@ -65,3 +65,11 @@ login: cadre_admin pass : admin
 Compte prof :
 **********
 login: prof pass : admin
+
+## 📊 Schéma de la Base de Données
+![Database Schema](assets/database_schema.png)
+
+## 🎥 Démonstration
+[📥 Télécharger la vidéo démo](assets/demo.mp4)
+
+
